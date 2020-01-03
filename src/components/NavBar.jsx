@@ -1,26 +1,16 @@
 import React, { Component } from "react";
 import { Menu, Segment } from "semantic-ui-react";
-import LoginModal from "./Login";
 
 export default class NavBar extends Component {
-  state = { activeItem: "home", isLoginModalOpen: false };
-
+  state = { activeItem: "home" };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
-  handleLoginModal = action => {
-    if (action === 1) this.setState({ isLoginModalOpen: true });
-    else this.setState({ isLoginModalOpen: false });
-  };
-
   render() {
     const { activeItem } = this.state;
     return (
-      <div>
-        <LoginModal
-          isOpen={this.state.isLoginModalOpen}
-          handleLoginModal={this.handleLoginModal}
-        />
-        <Segment inverted>
+      <div
+        style={{ width: "100%", height: "auto", backgroundColor: "#1B1C1D" }}
+      >
+        <Segment inverted style={{ boxRadius: "0" }}>
           <Menu inverted pointing secondary>
             <Menu.Item
               name="home"
@@ -41,12 +31,13 @@ export default class NavBar extends Component {
             <Menu.Menu position="right">
               <Menu.Item
                 name="Login"
-                onClick={() => this.handleLoginModal(1)}
+                onClick={() => this.props.handleLoginModal(1)}
               />
               <Menu.Item name="Sign Up" />
             </Menu.Menu>
           </Menu>
         </Segment>
+        
       </div>
     );
   }
