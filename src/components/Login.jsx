@@ -1,24 +1,45 @@
 import React from "react";
-import { Header, Image, Modal } from "semantic-ui-react";
+import {
+  Header,
+  Image,
+  Modal,
+  Button,
+  Form,
+} from "semantic-ui-react";
 
+import maleAvatar from "../assets/images/male-avatar.png";
+
+const dimmer = "blurring";
 const LoginModal = ({ isOpen, handleLoginModal }) => (
-  <Modal open={isOpen} onClose={() => handleLoginModal(2)}>
-    <Modal.Header>Select a Photo</Modal.Header>
+  <Modal dimmer={dimmer} open={isOpen} onClose={() => handleLoginModal(2)}>
+    <Modal.Header style={{ marginLeft: "20px" }}>User Login</Modal.Header>
     <Modal.Content image>
-      <Image
-        wrapped
-        size="medium"
-        src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-      />
+      <Image wrapped size="medium" src={maleAvatar} />
       <Modal.Description>
-        <Header>Default Profile Image</Header>
-        <p>
-          We've found the following gravatar image associated with your e-mail
-          address.
-        </p>
-        <p>Is it okay to use this photo?</p>
+        <Form>
+          <Form.Field>
+            <Header>Email</Header>
+            <input placeholder="Email" />
+          </Form.Field>
+          <Form.Field>
+            <Header>Password</Header>
+            <input placeholder="Password" />
+          </Form.Field>
+        </Form>
       </Modal.Description>
     </Modal.Content>
+    <Modal.Actions>
+      <Button color="black" onClick={() => handleLoginModal(2)}>
+        Close
+      </Button>
+      <Button
+        positive
+        icon="checkmark"
+        labelPosition="right"
+        content="Login"
+        onClick={() => handleLoginModal(2)}
+      />
+    </Modal.Actions>
   </Modal>
 );
 
