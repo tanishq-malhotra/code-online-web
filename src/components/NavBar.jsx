@@ -33,11 +33,13 @@ export default class NavBar extends Component {
                 name="Login"
                 onClick={() => this.props.handleLoginModal(1)}
               />
-              <Menu.Item name="Sign Up" />
+              <Menu.Item
+                name="Sign Up"
+                onClick={() => this.props.handleRegisterModal(1)}
+              />
             </Menu.Menu>
           </Menu>
         </Segment>
-        
       </div>
     );
   }
