@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import { Image, Modal, Button, Form } from "semantic-ui-react";
 
 import maleAvatar from "../../assets/images/signup-male-avatar.png";
-import { emailValidator, nameValidator, passValidator, aboutValidator } from "./registerUtil";
+import {
+  emailValidator,
+  nameValidator,
+  passValidator,
+  aboutValidator,
+  genderValidator,
+  ageValidator
+} from "./registerUtil";
 
 const dimmer = "blurring";
 const options = [
@@ -21,29 +28,58 @@ class RegisterModal extends Component {
     isNameCorrect: true,
     isEmailCorrect: true,
     isPassCorrect: true,
-    isAboutCorrect: true
+    isAboutCorrect: true,
+    isGenderCorrect: true,
+    isAgeCorrect: true
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = () => {
+    if (!nameValidator(this.state.name))
+      this.setState({ isNameCorrect: false });
+    else if (!this.state.isNameCorrect) this.setState({ isNameCorrect: true });
+
     if (!emailValidator(this.state.email))
       this.setState({ isEmailCorrect: false });
     else if (!this.state.isEmailCorrect)
       this.setState({ isEmailCorrect: true });
 
-    if (!nameValidator(this.state.name))
-      this.setState({ isNameCorrect: false });
-    else if (!this.state.isNameCorrect) this.setState({ isNameCorrect: true });
-
     if (!passValidator(this.state.pass))
       this.setState({ isPassCorrect: false });
     else if (!this.state.isPassCorrect) this.setState({ isPassCorrect: true });
 
-    if(!aboutValidator(this.state.about))
+    if (!genderValidator(this.state.gender))
+      this.setState({ isGenderCorrect: false });
+    else if (!this.state.isGenderCorrect)
+      this.setState({ isGenderCorrect: true });
+
+    if (!ageValidator(this.state.age)) this.setState({ isAgeCorrect: false });
+    else if (!this.state.isAgeCorrect) this.setState({ isAgeCorrect: true });
+
+    if (!aboutValidator(this.state.about))
       this.setState({ isAboutCorrect: false });
-    else if(!this.state.isAboutCorrect)
-      this.setState({isAboutCorrect: true});
+    else if (!this.state.isAboutCorrect)
+      this.setState({ isAboutCorrect: true });
+
+    if (
+      nameValidator(this.state.name) &&
+      emailValidator(this.state.email) &&
+      passValidator(this.state.pass) &&
+      genderValidator(this.state.gender) &&
+      ageValidator(this.state.age) &&
+      aboutValidator(this.state.about)
+    ) {
+      let data = {};
+      data.name = this.state.name;
+      data.email = this.state.email;
+      data.pass = this.state.pass;
+      data.gender = this.state.gender;
+      data.age = this.state.age;
+      data.about = this.state.about;
+
+      this.props.handleRegisterModal(2);
+    }
   };
 
   render() {
@@ -137,24 +173,56 @@ class RegisterModal extends Component {
                 )}
               </Form.Group>
               <Form.Group>
-                <Form.Select
-                  fluid
-                  label="Gender"
-                  options={options}
-                  placeholder="Gender"
-                  name="gender"
-                  onChange={this.handleChange}
-                />
-
-                <Form.Input
-                  label="Age"
-                  placeholder="Age"
-                  width="6"
-                  type="number"
-                  name="age"
-                  value={age}
-                  onChange={this.handleChange}
-                />
+                {this.state.isGenderCorrect ? (
+                  <Form.Select
+                    fluid
+                    label="Gender"
+                    options={options}
+                    placeholder="Gender"
+                    name="gender"
+                    onChange={this.handleChange}
+                  />
+                ) : (
+                  <Form.Select
+                    fluid
+                    label="Gender"
+                    options={options}
+                    placeholder="Gender"
+                    name="gender"
+                    onChange={this.handleChange}
+                    error={{
+                      content: "Please select your gender",
+                      pointing: "below"
+                    }}
+                  />
+                )}
+              </Form.Group>
+              <Form.Group>
+                {this.state.isAgeCorrect ? (
+                  <Form.Input
+                    label="Age"
+                    placeholder="Age"
+                    width="6"
+                    type="number"
+                    name="age"
+                    value={age}
+                    onChange={this.handleChange}
+                  />
+                ) : (
+                  <Form.Input
+                    label="Age"
+                    placeholder="Age"
+                    width="6"
+                    type="number"
+                    name="age"
+                    value={age}
+                    onChange={this.handleChange}
+                    error={{
+                      content: "Please enter your age",
+                      pointing: "below"
+                    }}
+                  />
+                )}
               </Form.Group>
 
               {this.state.isAboutCorrect ? (
