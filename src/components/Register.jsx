@@ -28,10 +28,9 @@ const RegisterModal = ({ isOpen, handleRegisterModal }) => (
               options={options}
               placeholder="Gender"
             />
+            <Form.Input label="Age" placeholder="Age" width={10}/>
           </Form.Group>
-          {/* <Form.Group widths="25">
-            
-          </Form.Group> */}
+          
 
           <Form.TextArea
             label="About"
