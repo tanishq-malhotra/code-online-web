@@ -7,7 +7,7 @@ import LoginModal from "./Login";
 import NavBar from "./NavBar";
 import CodeArea from "./CodeArea";
 import InputArea from "./InputArea";
-import RegisterModal from "./Register";
+import RegisterModal from "./register/Register";
 
 // general ip
 const machine =
