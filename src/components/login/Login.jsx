@@ -7,7 +7,7 @@ import {
   Form,
 } from "semantic-ui-react";
 
-import maleAvatar from "../assets/images/male-avatar.png";
+import maleAvatar from "../../assets/images/male-avatar.png";
 
 const dimmer = "blurring";
 const LoginModal = ({ isOpen, handleLoginModal }) => (

@@ -3,7 +3,7 @@ import { MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import { randomBytes } from "crypto";
 import io from "socket.io-client";
 
-import LoginModal from "./Login";
+import LoginModal from "./login/Login";
 import NavBar from "./NavBar";
 import CodeArea from "./CodeArea";
 import InputArea from "./InputArea";
