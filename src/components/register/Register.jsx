@@ -77,8 +77,8 @@ class RegisterModal extends Component {
       data.gender = this.state.gender;
       data.age = this.state.age;
       data.about = this.state.about;
-
       this.props.handleRegisterModal(2);
+      this.props.handleRegisterUser(data);
     }
   };
 
