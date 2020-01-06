@@ -10,7 +10,7 @@ import InputArea from "./InputArea";
 const machine =
   window.location.protocol + "//" + window.location.hostname + ":" + 5000;
 
-class App extends Component {
+class Code extends Component {
   valueGetter = React.createRef();
   state = {
     server: machine,
@@ -78,4 +78,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Code;
