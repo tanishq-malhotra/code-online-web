@@ -26,8 +26,8 @@ class Welcome extends Component {
 
   handleUserLogin = async data => {
     await axios.post(this.state.server + "/login", { data }).then(res => {
-      if (res.data === "done") this.props.handleLogin();
-      else if (res.data === "nope") alert("credentials incorrect");
+      if (res.data === "nope") alert("credentials incorrect");
+      else this.props.handleLogin(res.data);
     });
   };
 
