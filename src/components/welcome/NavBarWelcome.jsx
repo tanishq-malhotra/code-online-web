@@ -29,7 +29,7 @@ import { Menu, Segment, Button, Icon } from "semantic-ui-react";
             />
 
             <Menu.Menu position="right">
-              <Button icon labelPosition="right" animated="fade" color='grey'>
+              <Button icon labelPosition="right" animated="fade" color='green'>
                 <Icon name="plus"/>
                 <Button.Content visible>Create Project</Button.Content>
                 <Button.Content hidden> Temporary Project</Button.Content>
