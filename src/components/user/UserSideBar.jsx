@@ -24,6 +24,7 @@ const VerticalSidebar = ({ animation, direction, visible }) => (
       <Icon name="settings" />
       Settings
     </Menu.Item>
+    {/* <Menu.Item></Menu.Item> */}
   </Sidebar>
 );
 
@@ -36,7 +37,7 @@ class UserSideBar extends Component {
   render() {
     const { animation, direction } = this.state;
     return (
-      <div>
+      <div style={{height:'100vh'}}>
         <Sidebar.Pushable as={Segment}>
           <VerticalSidebar
             animation={animation}
@@ -45,15 +46,7 @@ class UserSideBar extends Component {
           />
           <Sidebar.Pusher>
             {this.props.children}
-            <Segment basic>
-              <Header as="h3">Application Content</Header>
-              <Header as="h3">Application Content</Header>
-              <Header as="h3">Application Content</Header>
-              <Header as="h3">Application Content</Header>
-              <Header as="h3">Application Content</Header>
-              <Header as="h3">Application Content</Header>
-              <Header as="h3">Application Content</Header>
-            </Segment>
+            
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>
