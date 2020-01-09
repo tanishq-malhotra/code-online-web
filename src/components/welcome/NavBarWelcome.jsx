@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Segment, Button, Icon } from "semantic-ui-react";
 
- class NavBarWelcome extends Component {
+class NavBarWelcome extends Component {
   state = { activeItem: "home" };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
   render() {
@@ -29,27 +29,19 @@ import { Menu, Segment, Button, Icon } from "semantic-ui-react";
             />
 
             <Menu.Menu position="right">
-              <Button icon labelPosition="right" animated="fade" color='green'>
-                <Icon name="plus"/>
+              <Button icon labelPosition="right" animated="fade" color="green">
+                <Icon name="plus" />
                 <Button.Content visible>Create Project</Button.Content>
                 <Button.Content hidden> Temporary Project</Button.Content>
               </Button>
-              {!this.props.isUserLogined ? (
-                <Menu.Item
-                  name="Login"
-                  onClick={() => this.props.handleLoginModal(1)}
-                />
-              ) : (
-                <div></div>
-              )}
-              {!this.props.isUserLogined ? (
-                <Menu.Item
-                  name="Sign Up"
-                  onClick={() => this.props.handleRegisterModal(1)}
-                />
-              ) : (
-                <Button>Logout</Button>
-              )}
+              <Menu.Item
+                name="Login"
+                onClick={() => this.props.handleLoginModal(1)}
+              />
+              <Menu.Item
+                name="Sign Up"
+                onClick={() => this.props.handleRegisterModal(1)}
+              />
             </Menu.Menu>
           </Menu>
         </Segment>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import LoginModal from "../login/Login";
-import NavBar from "./NavBarWelcome";
+import NavBarWelcome from "./NavBarWelcome";
 import RegisterModal from "../register/Register";
 
 // general ip
@@ -13,8 +13,7 @@ class Welcome extends Component {
   state = {
     server: machine,
     isLoginModalOpen: false,
-    isRegisterModalOpen: false,
-    isUserLogined: false
+    isRegisterModalOpen: false
   };
 
   // handlers
@@ -24,6 +23,7 @@ class Welcome extends Component {
     else this.setState({ isLoginModalOpen: false });
   };
 
+  // server request login
   handleUserLogin = async data => {
     await axios.post(this.state.server + "/login", { data }).then(res => {
       if (res.data === "nope") alert("credentials incorrect");
@@ -36,6 +36,7 @@ class Welcome extends Component {
     else this.setState({ isRegisterModalOpen: false });
   };
 
+  // server request register
   handleRegisterUser = async data => {
     await axios.post(this.state.server + "/register", { data }).then(res => {
       if (res.data === "done") alert("user registered");
@@ -56,10 +57,9 @@ class Welcome extends Component {
           handleRegisterModal={this.handleRegisterModal}
           handleRegisterUser={this.handleRegisterUser}
         />
-        <NavBar
+        <NavBarWelcome
           handleLoginModal={this.handleLoginModal}
           handleRegisterModal={this.handleRegisterModal}
-          isUserLogined={this.state.isUserLogined}
         />
       </div>
     );
