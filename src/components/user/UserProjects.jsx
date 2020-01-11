@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// eslint-disable-next-line
 import { Table, Grid, Icon, Header, Dropdown } from "semantic-ui-react";
 import axios from "axios";
 
@@ -9,9 +10,15 @@ const machine =
 class UserProjects extends Component {
   state = { userData: [] };
 
+  trigger = (
+    <span>
+      <Icon name="options" />
+    </span>
+  );
+
   getTable = () => {
     return (
-      <div >
+      <div>
         <Table celled basic>
           <Table.Header>
             <Table.Row>
@@ -19,18 +26,39 @@ class UserProjects extends Component {
               <Table.HeaderCell>Language</Table.HeaderCell>
               <Table.HeaderCell>Date Of Creation</Table.HeaderCell>
               <Table.HeaderCell>Last Editied</Table.HeaderCell>
+              <Table.HeaderCell>Options</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
             {this.state.userData.map(data => {
-              // eslint-disable-next-line no-unused-expressions
               return (
-                <Table.Row >
-                  <Table.Cell selectable style={{padding:'15px'}}  onClick={() => alert(data.name + "   " + data._id)} key={data._id}>{data.name}</Table.Cell>
+                <Table.Row>
+                  <Table.Cell
+                    selectable
+                    style={{ padding: "15px" }}
+                    onClick={() => alert(data.name + "   " + data._id)}
+                    key={data._id}
+                  >
+                    {data.name}
+                  </Table.Cell>
                   <Table.Cell>{data.language}</Table.Cell>
                   <Table.Cell>{data.dateOfCreation}</Table.Cell>
-              <Table.Cell>{data.lastEdited + '   '}{}</Table.Cell>
+                  <Table.Cell>
+                    {data.lastEdited + "   "}
+                    {}
+                  </Table.Cell>
+
+                  <Table.Cell>
+                    <Dropdown icon="options">
+                      <Dropdown.Menu>
+                        <Dropdown.Item text="Open..." description="ctrl + o" />
+                        <Dropdown.Item text="Rename" description="ctrl + r" />
+                        <Dropdown.Divider />
+                        <Dropdown.Item text="Download" icon="download" />
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Table.Cell>
                 </Table.Row>
               );
             })}
@@ -56,7 +84,7 @@ class UserProjects extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: "50px", marginLeft: "70px"}}>
+      <div style={{ marginTop: "50px", marginLeft: "70px" }}>
         <Grid columns={3}>
           <Grid.Row textAlign="left">
             <Grid.Column>
