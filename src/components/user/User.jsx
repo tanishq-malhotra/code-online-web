@@ -4,7 +4,6 @@ import axios from "axios";
 import UserSideBar from "./UserSideBar";
 import UserNavBar from "./UserNavBar";
 import InputModal from "../InputModal";
-import Table from "./UserProjects.jsx";
 
 const machine =
   window.location.protocol + "//" + window.location.hostname + ":" + 5000;
@@ -54,9 +53,7 @@ class User extends Component {
           handleLogout={this.props.handleLogout}
           userName = {this.props.userInfo.name}
         />
-        <UserSideBar sideBarVisible={this.state.sideBarVisible}>
-          <Table />
-        </UserSideBar>
+        <UserSideBar sideBarVisible={this.state.sideBarVisible} />
       </div>
     );
   }
