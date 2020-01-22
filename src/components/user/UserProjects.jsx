@@ -33,12 +33,11 @@ class UserProjects extends Component {
           <Table.Body>
             {this.state.userData.map(data => {
               return (
-                <Table.Row>
+                <Table.Row key={data._id}>
                   <Table.Cell
                     selectable
                     style={{ padding: "15px" }}
                     onClick={() => alert(data.name + "   " + data._id)}
-                    key={data._id}
                   >
                     {data.name}
                   </Table.Cell>
@@ -52,8 +51,23 @@ class UserProjects extends Component {
                   <Table.Cell>
                     <Dropdown icon="options">
                       <Dropdown.Menu>
-                        <Dropdown.Item text="Open..." description="ctrl + o" />
-                        <Dropdown.Item text="Rename" description="ctrl + r" />
+                        <Dropdown.Item
+                          text="Open"
+                          description="ctrl + o"
+                          onClick={() => alert("open" + data._id)}
+                        />
+                        <Dropdown.Item
+                          text="Rename"
+                          description="ctrl + r"
+                          icon='pencil'
+                          onClick={() => alert("rename")}
+                        />
+                        <Dropdown.Item
+                          icon="trash"
+                          text="Delete"
+                          description="del"
+                          onClick={() => alert("del")}
+                        />
                         <Dropdown.Divider />
                         <Dropdown.Item text="Download" icon="download" />
                       </Dropdown.Menu>
