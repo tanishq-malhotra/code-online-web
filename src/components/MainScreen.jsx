@@ -15,9 +15,9 @@ class MainScreen extends Component {
   // handlers
 
   handleUserLogin = data => {
-    this.setState({ isUserLogined: true, userInfo: data });
     localStorage.setItem("name", data.name);
     localStorage.setItem("id", data.id);
+    this.setState({ isUserLogined: true, userInfo: data });
   };
 
   handleLogout = () => {
