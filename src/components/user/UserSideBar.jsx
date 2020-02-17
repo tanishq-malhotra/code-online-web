@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Icon, Menu, Segment, Sidebar } from "semantic-ui-react";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
-import UserHome from "./UserHome";
 import UserProjects from "./UserProjects";
 import UserSettings from "./UserSettings";
 
@@ -17,18 +16,14 @@ const VerticalSidebar = ({ animation, direction, visible }) => (
     visible={visible}
     width="thin"
   >
-    <Menu.Item as={Link} to="/">
-      <Icon name="home" />
-      Home
-    </Menu.Item>
 
-    <Menu.Item as={Link} to="/projects">
-      <Icon name="code" />
+    <Menu.Item as={Link} to="/">
+      <Icon name="code" color="green"/>
       My Projects
     </Menu.Item>
 
     <Menu.Item as={Link} to="/settings">
-      <Icon name="settings" />
+      <Icon name="setting" />
       Settings
     </Menu.Item>
   </Sidebar>
@@ -54,8 +49,7 @@ class UserSideBar extends Component {
             <Sidebar.Pusher>
               <div>
                 <Switch>
-                  <Route exact path="/" component={UserHome} />
-                  <Route exact path="/projects" component={UserProjects} />
+                  <Route exact path="/" component={UserProjects} />
                   <Route exact path="/settings" component={UserSettings} />
                 </Switch>
               </div>
