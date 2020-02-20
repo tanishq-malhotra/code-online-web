@@ -8,7 +8,11 @@ import InputModal from "../InputModal";
 const machine =
   window.location.protocol + "//" + window.location.hostname + ":" + 5000;
 class User extends Component {
-  state = { sideBarVisible: true, createProjectModalVisible: false };
+  state = {
+    sideBarVisible: true,
+    createProjectModalVisible: false,
+    currPath: "/"
+  };
 
   switchProjectModalVisible = action => {
     if (action === 1) this.setState({ createProjectModalVisible: true });
@@ -23,8 +27,8 @@ class User extends Component {
     let data = {};
     data.projectName = projectName;
     data.lang = projectLang;
-    data.name = localStorage.getItem('name');
-    data.id = localStorage.getItem('id');
+    data.name = localStorage.getItem("name");
+    data.id = localStorage.getItem("id");
 
     axios
       .post(machine + "/create-project", { data })
@@ -35,6 +39,10 @@ class User extends Component {
       .catch(err => {
         if (err) throw err;
       });
+  };
+
+  updateCurrPath = present => {
+    this.setState({ currPath: this.state.currPath + "/" + present });
   };
 
   render() {
@@ -51,9 +59,13 @@ class User extends Component {
           switchSideBar={this.switchSideBar}
           switchProjectModalVisible={this.switchProjectModalVisible}
           handleLogout={this.props.handleLogout}
-          userName = {this.props.userInfo.name}
+          userName={this.props.userInfo.name}
         />
-        <UserSideBar sideBarVisible={this.state.sideBarVisible} />
+        <UserSideBar
+          sideBarVisible={this.state.sideBarVisible}
+          updateCurrPath={this.updateCurrPath}
+          currPath={this.state.currPath}
+        />
       </div>
     );
   }

@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 // eslint-disable-next-line
-import { Table, Grid, Icon, Header, Dropdown } from "semantic-ui-react";
+import { Table, Grid, Icon, Header } from "semantic-ui-react";
+import { Dimmer, Loader, Image, Segment } from "semantic-ui-react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 // general ip
 const machine =
   window.location.protocol + "//" + window.location.hostname + ":" + 5000;
 
 class UserProjects extends Component {
-  state = { userData: [] };
+  state = { userData: [], noProject: false };
 
   trigger = (
     <span>
@@ -26,7 +28,6 @@ class UserProjects extends Component {
               <Table.HeaderCell>Language</Table.HeaderCell>
               <Table.HeaderCell>Date Of Creation</Table.HeaderCell>
               <Table.HeaderCell>Last Editied</Table.HeaderCell>
-              <Table.HeaderCell>Options</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -36,42 +37,21 @@ class UserProjects extends Component {
                 <Table.Row key={data._id}>
                   <Table.Cell
                     selectable
-                    style={{ padding: "15px" }}
-                    onClick={() => alert(data.name + "   " + data._id)}
+                    style={{ color: "black" }}
+                    onClick={() => localStorage.setItem('pname', data.name)}
                   >
-                    {data.name}
+                    <Link to="/project-tree">
+                      <div style={{ marginTop: "10px", marginLeft: "15px" }}>
+                        {data.name}
+                      </div>
+                    </Link>
                   </Table.Cell>
+
                   <Table.Cell>{data.language}</Table.Cell>
                   <Table.Cell>{data.dateOfCreation}</Table.Cell>
                   <Table.Cell>
                     {data.lastEdited + "   "}
                     {}
-                  </Table.Cell>
-
-                  <Table.Cell>
-                    <Dropdown icon="options">
-                      <Dropdown.Menu>
-                        <Dropdown.Item
-                          text="Open"
-                          description="ctrl + o"
-                          onClick={() => alert("open" + data._id)}
-                        />
-                        <Dropdown.Item
-                          text="Rename"
-                          description="ctrl + r"
-                          icon='pencil'
-                          onClick={() => alert("rename")}
-                        />
-                        <Dropdown.Item
-                          icon="trash"
-                          text="Delete"
-                          description="del"
-                          onClick={() => alert("del")}
-                        />
-                        <Dropdown.Divider />
-                        <Dropdown.Item text="Download" icon="download" />
-                      </Dropdown.Menu>
-                    </Dropdown>
                   </Table.Cell>
                 </Table.Row>
               );
@@ -90,10 +70,25 @@ class UserProjects extends Component {
       .then(res => {
         if (res.data !== "nope" && res.data !== "err")
           this.setState({ userData: res.data });
+        else this.setState({noProject: true})
       })
       .catch(err => {
         throw err;
       });
+  };
+
+   FileLoader = () => {
+    return (
+      <div>
+        <Segment>
+          <Dimmer active inverted>
+            <Loader inverted>Loading</Loader>
+          </Dimmer>
+
+          <Image src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
+        </Segment>
+      </div>
+    );
   };
 
   render() {
@@ -114,10 +109,12 @@ class UserProjects extends Component {
             <Grid.Column width={12}>
               {this.state.userData.length ? (
                 this.getTable()
-              ) : (
+              ) : this.state.noProject ? (
                 <Header as="h2" textAlign="center">
                   <Header.Content>No Projects</Header.Content>
                 </Header>
+              ) : (
+                this.FileLoader()
               )}
             </Grid.Column>
             <Grid.Column width={2}></Grid.Column>

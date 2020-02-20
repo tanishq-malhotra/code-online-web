@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 import UserProjects from "./UserProjects";
 import UserSettings from "./UserSettings";
+import UserProjectList from "./UserProjectList";
 
 const VerticalSidebar = ({ animation, direction, visible }) => (
   <Sidebar
@@ -16,9 +17,8 @@ const VerticalSidebar = ({ animation, direction, visible }) => (
     visible={visible}
     width="thin"
   >
-
     <Menu.Item as={Link} to="/">
-      <Icon name="code" color="green"/>
+      <Icon name="code" />
       My Projects
     </Menu.Item>
 
@@ -49,7 +49,17 @@ class UserSideBar extends Component {
             <Sidebar.Pusher>
               <div>
                 <Switch>
-                  <Route exact path="/" component={UserProjects} />
+                  <Route exact path="/" render={() => <UserProjects />} />
+                  <Route
+                    exact
+                    path="/project-tree"
+                    render={() => (
+                      <UserProjectList
+                        updateCurrPath={this.props.updateCurrPath}
+                        currPath={this.props.currPath}
+                      />
+                    )}
+                  />
                   <Route exact path="/settings" component={UserSettings} />
                 </Switch>
               </div>
